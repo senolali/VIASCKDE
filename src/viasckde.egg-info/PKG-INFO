@@ -1,0 +1,38 @@
+Metadata-Version: 2.4
+Name: viasckde
+Version: 0.1.1
+Summary: VIASCKDE: internal cluster validity index (KDE-weighted compactness & separation)
+Author-email: Ali Şenol <alisenol@tarsus.edu.tr>
+License: MIT
+Project-URL: Homepage, https://github.com/senolali/viasckde
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Intended Audience :: Science/Research
+Classifier: Topic :: Scientific/Engineering :: Artificial Intelligence
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: numpy>=1.21
+Requires-Dist: scikit-learn>=1.0
+Requires-Dist: scipy>=1.7
+Dynamic: license-file
+
+# VIASCKDE
+
+Python implementation of the VIASCKDE internal cluster validity index.
+
+## Installation
+
+```bash
+pip install viasckde
+```
+
+## Usage
+```python
+from viasckde import viasckde_score
+
+# X: your data array
+# labels: cluster labels
+score = viasckde_score(X, labels, bandwidth=0.05)
+```
