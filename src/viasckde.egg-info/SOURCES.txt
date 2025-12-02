@@ -1,4 +1,6 @@
 LICENSE
+MANIFEST.in
+README.html
 README.md
 pyproject.toml
 src/viasckde/__init__.py
