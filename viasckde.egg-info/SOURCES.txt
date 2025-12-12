@@ -1,0 +1,12 @@
+MANIFEST.in
+README.md
+pyproject.toml
+tests/test_viasckde.py
+viasckde/__init__.py
+viasckde/_utils.py
+viasckde/viasckde.py
+viasckde.egg-info/PKG-INFO
+viasckde.egg-info/SOURCES.txt
+viasckde.egg-info/dependency_links.txt
+viasckde.egg-info/requires.txt
+viasckde.egg-info/top_level.txt

@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "viasckde"
-version = "0.1.7"
+version = "1.0.0"
 description = "VIASCKDE: internal cluster validity index (KDE-weighted compactness & separation)"
 readme = "README.md"
 authors = [
