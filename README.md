@@ -1,0 +1,121 @@
+# VIASCKDE Index
+
+**VIASCKDE** is a novel internal cluster validity index for arbitrary-shaped clusters based on Kernel Density Estimation (KDE).
+
+---
+
+## Motivation
+
+The VIASCKDE Index was developed to accurately assess clustering quality for non-spherical, arbitrarily shaped clusters, overcoming limitations of traditional validity measures that assume spherical structures. By combining compactness and separation at the point level with kernel density estimation to emphasize dense regions, VIASCKDE provides robust evaluation across diverse clustering outcomes.
+
+The index evaluates clustering quality regardless of cluster shape by computing **compactness** and **separation** at the *point level* instead of relying on cluster centroids. This makes it robust for non-spherical and arbitrarily shaped clusters.
+
+---
+
+## Installation
+
+```bash
+pip install viasckde
+```
+
+## Usage 
+
+```bash
+from sklearn.cluster import DBSCAN
+from sklearn.datasets import make_moons
+from sklearn.preprocessing import StandardScaler
+from sklearn.metrics import adjusted_rand_score
+from viasckde import viasckde_score
+import matplotlib.pyplot as plt
+
+# 1. Arbitrary-shaped dataset (moons)
+X, y_true = make_moons(n_samples=10000, noise=0.07, random_state=42)
+X = StandardScaler().fit_transform(X)
+
+Clustering process with DBSCAN
+db = DBSCAN(eps=0.1, min_samples=5)
+labels = db.fit_predict(X)
+
+# VIASCKDE Score
+viasckde = viasckde_score(X, labels)
+
+# Adjusted Rand Index to validate the suc ess of VIASCKDE Index
+ari = adjusted_rand_score(y_true, labels)
+
+# print results
+print("VIASCKDE Score:", viasckde)
+print("ARI Score:", ari)
+
+# to visualize results
+plt.figure(figsize=(8, 6))
+plt.scatter(X[:, 0], X[:, 1], c=labels, cmap="viridis", s=12)
+plt.title(f"Best DBSCAN Clusters (eps=0.1, min_samples=5)\n"
+          f"VIASCKDE={viasckde:.4f}, ARI={ari:.4f}")
+plt.xlabel("Feature 1")
+plt.ylabel("Feature 2")
+plt.grid(True)
+plt.show()
+
+```
+
+## Concept
+
+In non-spherical clusters, the distance from a point to the nearest neighbor in the same cluster is often more meaningful than the distance to the cluster centroid.
+VIASCKDE computes:
+
+Compactness: distance to the closest point in the same cluster
+
+Separation: distance to the closest point in a different cluster
+
+This point-level computation ensures realistic evaluation of clusters regardless of their shape.
+
+
+
+## Parameters of VIASCKDE Index
+
+VIASCKDE index needs four parameters (two are optional) that are:
+    
+	- X: your data array (NumPy-like)
+	- labels: predicted cluster labels
+    - kernel (optional): selected kernel method, krnl='gaussian' is default kernel.  But it could be 'tophat', 'epanechnikov', 'exponential', 'linear', or 'cosine'.
+    - bandwidth(optional): the bandwidth value of kernel density estimation. b_width=0.05 is the default value. But it could be changed.
+
+
+
+## Output Range
+
+VIASCKDE returns a score in [-1, +1]:
+
++1: best clustering
+
+-1: worst clustering
+
+
+## Citation
+
+
+Ali Şenol, "VIASCKDE Index: A Novel Internal Cluster Validity Index for Arbitrary-Shaped  Clusters Based on the Kernel Density Estimation", Computational Intelligence and Neuroscience, vol. 2022, Article ID 4059302, 20 pages, 2022. https://doi.org/10.1155/2022/4059302
+
+
+## BibTeX
+
+@article{csenol2022viasckde,
+  title={VIASCKDE Index: A Novel Internal Cluster Validity Index for Arbitrary-Shaped Clusters Based on the Kernel Density Estimation},
+  author={{\c{S}}enol, Ali},
+  journal={Computational Intelligence and Neuroscience},
+  volume={2022},
+  number={1},
+  pages={4059302},
+  year={2022},
+  publisher={Wiley Online Library},
+  doi = "10.1155/2022/4059302"
+}
+
+
+## License & Author
+
+Author: Assoc. Prof. Dr. Ali Şenol
+Computer Engineering Department, Tarsus University
+
+License: MIT
+

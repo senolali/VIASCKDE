@@ -1,0 +1,1 @@
+recursive-include viasckde/results *.png *.jpg *.jpeg *.gif
